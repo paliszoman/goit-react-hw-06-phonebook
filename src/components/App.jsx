@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { Form } from './Form/Form.jsx';
 import { Filter } from './Filter/Filter.jsx';
 import { ContactList } from './ContactList/ContactList.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPhonebook } from '../app/selectors';
+import { useDispatch } from 'react-redux';
+
 import { setStartContacts } from '../app/phonebookSlice';
 
 export const App = () => {
