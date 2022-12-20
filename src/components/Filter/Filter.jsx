@@ -1,20 +1,20 @@
 import css from './Filter.module.css';
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Filter = props => {
-  let [searchFromFilter, setSearch] = useState('');
+import { useDispatch } from 'react-redux';
+import { searchForContacts } from '../../app/phonebookSlice';
+
+export const Filter = () => {
+  const dispatch = useDispatch();
 
   const formSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget.elements;
-    const contact = form.name.value;
-    setSearch((searchFromFilter = contact));
-    props.onChange(searchFromFilter);
+    const form = e.currentTarget;
+    dispatch(searchForContacts(form.value));
   };
 
   return (
-    <form className={css.form} onChange={formSubmit}>
+    <form className={css.form}>
       <label className={css.label}>Find contacts by name</label>
       <input
         className={css.input}
@@ -23,6 +23,7 @@ export const Filter = props => {
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
+        onChange={formSubmit}
       />
     </form>
   );
